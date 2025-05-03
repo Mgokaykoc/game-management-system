@@ -59,7 +59,7 @@ async def update_user(request):
 
 
 async def delete_user(request):
-
+#deleteuserbyid
     user_id = str(request.json.get("id"))
     print(user_id)
 

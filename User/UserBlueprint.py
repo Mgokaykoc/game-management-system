@@ -7,7 +7,7 @@ from User.UserServices import create_user, get_all_users, get_user_by_id, update
 user_blueprint = Blueprint("user_blueprint", url_prefix="/users")
 
 
-# 1. Kullanıcı oluştur (POST)
+# 1. Kullanıcı oluşturma (POST)
 @user_blueprint.post("/")
 async def create_new_user(request):
    return await create_user(request)
