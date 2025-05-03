@@ -1,16 +1,16 @@
-# This is a sample Python script.
+from sanic import Sanic
+from sanic.response import text
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from atlas import init_db
+
+app = Sanic("SanicExample")
+
+# Sanic sunucusu başlatılmadan ÖNCE init_db'yi çalıştırıyoruz
+@app.before_server_start
+async def setup_database(app, loop):
+    await init_db()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    app.run(host="0.0.0.0", port=8000, debug=True)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
