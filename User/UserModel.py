@@ -12,7 +12,7 @@ from sanic import json, text
 class User(Document):
     id: str = Field(default_factory=lambda: str(uuid4()))
     username: str  # Kullanıcı adı
-    password: str  # Şifre (hashlenmiş olarak saklanmalı!)
+    password: str
     total_played_time: Optional[int] = 0  # Tüm oyunlarda harcanan toplam süre
     owned_games: List[dict] # Sahip olunan oyunlar listesi (alt özellikler dahil)
     most_played_game: Optional[str] = None  # En çok oynanan oyunların ID'leri (isteğe bağlı)
