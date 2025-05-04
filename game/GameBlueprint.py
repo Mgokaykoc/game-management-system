@@ -1,5 +1,4 @@
 from sanic import Blueprint
-from sanic.response import json
 
 from game.GameService import GameService
 
