@@ -6,8 +6,6 @@ from User.UserModel import User
 from game.GameModel import GameModel
 
 
-class OwnedModel(Document):from beanie import Link
-
 class OwnedModel(Document):
     user: Link[User]  # Reference to the User collection
     game: Link[GameModel]  # Reference to the GameModel collection
@@ -22,8 +20,8 @@ class OwnedModel(Document):
     def to_dict(self) -> dict:
         return {
             "id": str(self.id),  # Convert to string to make it JSON serializable
-            "user": str(self.user.id),
-            "game": str(self.game.id),
+            "user": str(self.user.ref.id),
+            "game": str(self.game.ref.id),
             "playTime": self.playTime,
             "rating": self.rating,
             "comment": self.comment
@@ -35,8 +33,8 @@ class OwnedModel(Document):
         #cls demek class'ın kendisi demek. JSON olarak gönderilen isteği
         #yorumun yarısı kesilmiş ama objeye dönüştürüyo diyecektim herhalde
         return cls(
-            user=Link[User](data["userId"]),
-            game=Link[GameModel](data["gameId"]),
+            user= data["userId"],
+            game= data["gameId"],
             playTime=data.get("playTime", 0),
             rating=data.get("rating", 0),
             comment=data.get("comment", [])

@@ -39,6 +39,16 @@ async def add_owned(request):
     """
     Example JSON body:
     {
+        "userId": "68169d748e21406fe36eb7cf",
+        "gameId": "68169d748e21406fe36eb7cf",
+        "playTime": 130,
+        "rating": 5,
+        "comment": [
+            {
+                "username": "username",
+                "text": "Great game!"
+            }
+        ]
     }
     """
 

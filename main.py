@@ -1,11 +1,12 @@
 from sanic import Sanic
 from sanic_cors import CORS
+
 import User.UserBlueprint
-
 import game.GameBlueprint
-
+import owned.OwnedBlueprint
 
 from atlas import init_db
+
 
 app = Sanic("SanicExample")
 
@@ -15,6 +16,7 @@ app.blueprint(User.UserBlueprint.user_blueprint)
 
 app.blueprint(User.UserBlueprint.user_blueprint)
 app.blueprint(game.GameBlueprint.bp)
+app.blueprint(owned.OwnedBlueprint.bp)
 
 
 # Sanic sunucusu başlatılmadan ÖNCE init_db'yi çalıştırıyoruz
