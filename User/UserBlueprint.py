@@ -1,37 +1,46 @@
 from sanic import Blueprint, response
 
-from User import UserModel, UserServices
-import json
-from User.UserServices import create_user, get_all_users, get_user_by_id, update_user,delete_user
+from User import UserServices
+from User.UserServices import create_user, get_all_users, update_user,delete_user
+
 # Blueprint tanımı
-user_blueprint = Blueprint("user_blueprint", url_prefix="/users")
+user_blueprint = Blueprint("user_blueprint", url_prefix="/api/users")
 
 
-# 1. Kullanıcı oluşturma (POST)
-@user_blueprint.post("/")
-async def create_new_user(request):
-   return await create_user(request)
 
-
-# 2. Tüm kullanıcıları listele (GET)
-@user_blueprint.get("/allusers")
+@user_blueprint.get("/getAll")
 async def read_users(request):
     return await get_all_users(request)
+    # Example: GET /getAll
 
-
-# 3. Tek bir kullanıcıyı getir (GET)
-@user_blueprint.route("/getbyid", methods=["GET"])
+@user_blueprint.route("/getById", methods=["GET"])
 async def get_user_by_id(request):
-    # Example: GET /getById?id=123
+    # Example: GET /getById?id=68169d4e8e21406fe36eb7ce
     return await UserServices.get_user_by_id(request)
 
+@user_blueprint.post("/add")
+async def create_new_user(request):
+   return await create_user(request)
+"""
+ 
+"""
 
-# 4. Kullanıcı bilgilerini güncelle (PUT)
-@user_blueprint.put("/updatebyid")
+@user_blueprint.put("/update")
 async def update_existing_user(request):
    return await update_user(request)
+"""
+Sadece "id" girilmesi şart, diğerleri güncellenecekse girilecek.
+Example JSON body:
+{
+    "id": "68169d4e8e21406fe36eb7ce",
+    "username": "updated username",
+    "password": "updated password",
+    "total_play_time": 123,
+    "most_played_game": "updated game name"
+}
+"""
 
-# 5. Kullanıcıyı sil (DELETE)
-@user_blueprint.delete("/delete_user")
+@user_blueprint.delete("/delete")
 async def delete_existing_user(request):
  return await delete_user(request)
+# Example: DELETE /delete?id=68169d4e8e21406fe36eb7ce
