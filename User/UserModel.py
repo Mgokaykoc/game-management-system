@@ -44,6 +44,6 @@ Pycharm'ın autocompete özelliğiyle oluşturulmuş bir örnek JSON. Post ederk
     "username": "example_user",
     "password": "example_password",
     "total_play_time": 120,
-    "most_played_game": "Game Name"
+    "most_played_game": "game Name"
 }
 """

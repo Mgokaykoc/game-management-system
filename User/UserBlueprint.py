@@ -44,3 +44,7 @@ Example JSON body:
 async def delete_existing_user(request):
  return await delete_user(request)
 # Example: DELETE /delete?id=68169d4e8e21406fe36eb7ce
+
+@user_blueprint.get("/checkuser")
+async def checkuser(request):
+    return await check_user(request)

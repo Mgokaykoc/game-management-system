@@ -1,8 +1,8 @@
 from sanic import Blueprint
 
-from Game.GameService import GameService
+from game.GameService import GameService
 
-# Define the Blueprint for Game entity
+# Define the Blueprint for game entity
 bp = Blueprint("GameBlueprint", url_prefix="/api/games")
 
 
@@ -25,7 +25,7 @@ async def add_game(request):
     """
     Example JSON body:
     {
-        "name": "Game Name",
+        "name": "game Name",
         "genre": "Action",
         "photo": "http://example.com/photo.jpg",
         "playTimeOfGame": 120,
