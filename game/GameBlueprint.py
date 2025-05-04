@@ -1,4 +1,4 @@
-from sanic import Sanic, Blueprint
+from sanic import Blueprint
 from sanic.response import json
 
 from game.GameService import GameService
@@ -6,7 +6,6 @@ from game.GameService import GameService
 # Define the Blueprint for Game entity
 bp = Blueprint("GameBlueprint", url_prefix="/api/games")
 
-#request.args.get("id")
 
 @bp.route("/getAll", methods=["GET"])
 async def get_games(request):
@@ -39,15 +38,18 @@ async def add_game(request):
 async def update_game(request):
     return await GameService.update_game(request)
     """
+    Sadece "id" girilmesi şart, diğerleri güncellenecekse girilecek.
     Example JSON body:
     {
         "id": "68169d748e21406fe36eb7cf",
-        "name": "Updated Game Name",
-        ...
-        değiştirilmek istenen ne varsa koyulur
+        "name": "updated name",
+        "genre": "updated genre", 
+        "photo": "http://example.com/updatedphoto.jpg",  
+        "playTimeOfGame": 123, 
     }
     """
 
 @bp.route("/delete", methods=["DELETE"])
 async def delete_game(request):
     return await GameService.delete_game(request)
+    # Example: DELETE /delete?id=68169d748e21406fe36eb7cf

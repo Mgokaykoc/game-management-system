@@ -1,10 +1,9 @@
 from sanic import Blueprint, response
 
-from User import UserModel, UserServices
-import json
+from User import UserServices
 from User.UserServices import create_user, get_all_users, get_user_by_id, update_user,delete_user
 # Blueprint tanımı
-user_blueprint = Blueprint("user_blueprint", url_prefix="/users")
+user_blueprint = Blueprint("user_blueprint", url_prefix="/api/users")
 
 
 # 1. Kullanıcı oluşturma (POST)
