@@ -44,7 +44,7 @@ async def update_user(request):
         # Kullanıcıyı ID'sine göre bul
         user = await User.get(user_id)
         if not user:
-            return {"status": "error", "message": "User not found"}
+            return json({"status": "error", "message": "User not found"})
 
         # databasede id _id olarak tutulduğu için bunu silmezsek bi dene daha id diye field açıyor
         update_data.pop("id")
@@ -54,25 +54,17 @@ async def update_user(request):
         return text("User informations updated successfully")
 
     except Exception as e:
-        return {"status": "error", "message": str(e)}
-
+        return json({"status": "error", "message": str(e)})
 
 
 async def delete_user(request):
-#deleteuserbyid
-    user_id = str(request.json.get("id"))
-    print(user_id)
-
+    user_id = str(request.args.get("id"))
     try:
-
-        response=await User.get(user_id)
-        if response is None:
-            return text("User not found")
-
+        response = await User.get(user_id)
         if response:
             await response.delete()
             return  text("User deleted successfully")
-
-
+        else:
+            return json({"status": "error", "message": "User not found"})
     except Exception as e:
-        return {"status": "error", "message": str(e)}
+        return json({"status": "error", "message": str(e)})
