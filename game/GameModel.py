@@ -38,7 +38,7 @@ class GameModel(Document):
 """
 Pycharm'ın autocompete özelliğiyle oluşturulmuş bir örnek JSON. Post ederken kopyalamalık.
 {
-    "name": "Game Name",
+    "name": "game Name",
     "genre": "Action",
     "photo": "http://example.com/photo.jpg",
     "playTimeOfGame": 120,

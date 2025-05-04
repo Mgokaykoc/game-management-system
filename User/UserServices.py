@@ -68,3 +68,27 @@ async def delete_user(request):
             return json({"status": "error", "message": "User not found"})
     except Exception as e:
         return json({"status": "error", "message": str(e)})
+
+    async def delete_user(request):
+        user_id = str(request.args.get("id"))
+        try:
+            response = await User.get(user_id)
+            if response:
+                await response.delete()
+                return text("User deleted successfully")
+            else:
+                return json({"status": "error", "message": "User not found"})
+        except Exception as e:
+            return json({"status": "error", "message": str(e)})
+
+    async def check_user(request):
+        user_id = str(request.args.get("id"))
+        try:
+            response = await User.get(user_id)
+            if response:
+                return  text("Kullanıcı Bulundu")
+            else:
+                return text("Kullanıcı Bulunamadı")
+        except Exception as e:
+            return json({"status": "error", "message": str(e)})
+
