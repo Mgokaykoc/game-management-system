@@ -126,5 +126,33 @@ class OwnedService:
         except Exception as e:
             return json({"status": "error", "message": str(e)})
 
+    @staticmethod
+    async def put_comment(request):
+        try:
+            owned = await OwnedModel.get(str(request.args.get("id")))
+            if not owned:
+                return json({"status": "error", "message": "OwnedModel not found"})
+            if owned.playTime < 1:
+                return json({"status": "error", "message": "OwnedModel is played less than 1 hour"})
+
+            comment = {
+                "username": request.json["username"],
+                "text": request.json["comment"]
+            }
+            owned.comment.append(comment)
+            await owned.replace()
+            return text("Comment added successfully")
+        except Exception as e:
+            return json({"status": "error", "message": str(e)})
+
+    @staticmethod
+    async def get_comment_by_game(request):
+        try:
+            game_id = str(request.args.get("gameId"))
+            results = await OwnedModel.find_many(OwnedModel.game.id == PydanticObjectId(game_id)).to_list()
+            return json([owned.comment for owned in results])
+        except Exception as e:
+            return json({"status": "error", "message": str(e)})
+
 
 

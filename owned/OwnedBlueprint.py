@@ -62,6 +62,22 @@ async def rate_owned(request):
     return await OwnedService.rate_owned(request)
     # Example: PUT /rate?id=68169d748e21406fe36eb7cf&rating=5
 
+@bp.route("/comment", methods=["PUT"])
+async def comment(request):
+    return await OwnedService.put_comment(request)
+    """
+    {
+        "username": "username"
+        "text": "Great game!",
+    }
+    """
+
+@bp.route("/getByGame", methods=["GET"])
+async def get_comment_by_game(request):
+    return await OwnedService.get_comment_by_game(request)
+    # Example: GET /commentByGame?gameId=68169d748e21406fe36eb7cf
+
+
 @bp.route("/update", methods=["PUT"])
 async def update_owned(request):
     return await OwnedService.update_owned(request)
