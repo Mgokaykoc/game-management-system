@@ -1,3 +1,4 @@
+
 from typing import List, Optional
 from uuid import uuid4
 
@@ -5,6 +6,7 @@ from beanie import Document
 from pydantic import Field
 from typing import List, Dict
 from sanic import json, text
+
 
 
 class User(Document):

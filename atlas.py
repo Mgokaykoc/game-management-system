@@ -2,7 +2,7 @@ from beanie import init_beanie
 import motor.motor_asyncio
 
 from User.UserModel import User
-from game.GameModel import GameModel
+from Game.GameModel import GameModel
 
 async def init_db():
 

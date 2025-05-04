@@ -1,6 +1,6 @@
 from sanic import json, text
 
-from game.GameModel import GameModel
+from Game.GameModel import GameModel
 
 class GameService:
 
