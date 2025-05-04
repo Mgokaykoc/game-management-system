@@ -22,12 +22,7 @@ async def get_user_by_id(request):
 async def create_new_user(request):
    return await create_user(request)
 """
-{
-    "username": "example_user",
-    "password": "example_password",
-    "total_play_time": 120,
-    "most_played_game": "Game Name"
-}
+ 
 """
 
 @user_blueprint.put("/update")

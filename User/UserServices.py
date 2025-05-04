@@ -46,14 +46,11 @@ async def update_user(request):
         if not user:
             return {"status": "error", "message": "User not found"}
 
-        # "update_data"dan None değerleri filtrele (isteğe bağlı)
-        update_data = {key: value for key, value in update_data.items()}
+        # databasede id _id olarak tutulduğu için bunu silmezsek bi dene daha id diye field açıyor
+        update_data.pop("id")
 
-        # Güncelleme işlemi (MongoDB $set kullanılarak)
         await user.update({"$set": update_data})
 
-        # Güncellenmiş kullanıcıyı döndür
-        updated_user = await User.get(user_id)
         return text("User informations updated successfully")
 
     except Exception as e:
