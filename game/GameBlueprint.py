@@ -1,6 +1,6 @@
 from sanic import Blueprint
 
-from Game.GameService import GameService
+from game.GameService import GameService
 
 # Define the Blueprint for Game entity
 bp = Blueprint("GameBlueprint", url_prefix="/api/games")
