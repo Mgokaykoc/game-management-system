@@ -1,6 +1,8 @@
 from sanic import json, text
 from typing import Dict, Any
 from bson import ObjectId
+from sanic.response import JSONResponse
+
 from User.UserModel import User, to_dict, from_dict
 from typing import List
 
@@ -15,10 +17,11 @@ async def create_user(request):
     except Exception as e:
         return text(str(e), status=400)
 
-async def get_all_users(request) -> list[dict]:
-    users = await User.find_all().to_list()
-    return json([to_dict(user) for user in users])
 
+async def get_all_users(request) -> JSONResponse:
+    users = await User.find_all().to_list()
+    userlist = [to_dict(user) for user in users]
+    return json(userlist)
 
 
 async def get_user_by_id(request):

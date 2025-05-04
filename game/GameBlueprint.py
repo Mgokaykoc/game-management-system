@@ -10,45 +10,44 @@ bp = Blueprint("GameBlueprint", url_prefix="/api/games")
 
 @bp.route("/getAll", methods=["GET"])
 async def get_games(request):
-    # Example: GET /getAll
     return await GameService.get_all_games(request)
+    # Example: GET /getAll
+
 
 
 @bp.route("/getById", methods=["GET"])
 async def get_game(request):
-    # Example: GET /getById?id=123
-    return await GameService.get_game_by_id(request)
+    return await GameService.get_by_id(request)
+    # Example: GET /getById?id=68169d748e21406fe36eb7cf
 
 
 @bp.route("/add", methods=["POST"])
 async def add_game(request):
-    # Example: POST /add
-    # Request Body (JSON):
-    # {
-    #     "title": "New Game",
-    #     "authors": "Jane Austen",
-    #     "isbn": "0-061-96436-0",
-    #     "publisher": "Publisher Name",
-    #     "category": "Literature",
-    #     "date":"1992-12-28",1.	Introduction
-    #     "pages":192
-    # }
     return await GameService.add_game(request)
+    """
+    Example JSON body:
+    {
+        "name": "Game Name",
+        "genre": "Action",
+        "photo": "http://example.com/photo.jpg",
+        "playTimeOfGame": 120,
+    }
+    """
 
 
 @bp.route("/update", methods=["PUT"])
 async def update_game(request):
-    # Example: PUT /update
-    # Request Body (JSON):
-    # {
-    #     "id": 123,
-    #     "title": "Updated Game Title",
-    #     "author": "Updated Author Name"
-    # }
     return await GameService.update_game(request)
-
+    """
+    Example JSON body:
+    {
+        "id": "68169d748e21406fe36eb7cf",
+        "name": "Updated Game Name",
+        ...
+        değiştirilmek istenen ne varsa koyulur
+    }
+    """
 
 @bp.route("/delete", methods=["DELETE"])
 async def delete_game(request):
-    # Example: DELETE /delete?id=123
     return await GameService.delete_game(request)

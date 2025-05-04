@@ -5,20 +5,23 @@ class GameModel(Document):
     genre: str
     photo: str
     playTimeOfGame: int
-    totalRating: int = None
-    allComments: list = None
+    totalRating: int = 0
+
+    class Settings:
+        name = "game"
+        # MongoDB’deki koleksiyon adı
 
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
-            "id": self.id,
+            "id": str(self.id),  # Convert to string to make it JSON serializable
             "name": self.name,
             "genre": self.genre,
             "photo": self.photo,
             "playTimeOfGame": self.playTimeOfGame,
             "totalRating": self.totalRating,
-            "allComments": self.allComments
         }
+
 
     @classmethod
     def from_dict(cls, data):
@@ -29,6 +32,15 @@ class GameModel(Document):
             genre=data["genre"],
             photo=data["photo"],
             playTimeOfGame=data["playTimeOfGame"],
-            totalRating=data.get("totalRating", None),
-            allComments=data.get("allComments", None)
+            totalRating=data.get("totalRating", 0)
         )
+
+"""
+Pycharm'ın autocompete özelliğiyle oluşturulmuş bir örnek JSON. Post ederken kopyalamalık.
+{
+    "name": "Game Name",
+    "genre": "Action",
+    "photo": "http://example.com/photo.jpg",
+    "playTimeOfGame": 120,
+}
+"""
