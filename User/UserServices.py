@@ -27,8 +27,8 @@ async def get_all_users(request) -> JSONResponse:
 async def get_user_by_id(request):
 
         try:
-            (user_id) = str(request.args.get("id"))
-            user = await User.find_one({"_id":(user_id)})
+            user_id = str(request.args.get("id"))
+            user = await User.get(user_id)
             if user:
                 result = to_dict(user)
                 return json(result)
@@ -42,18 +42,18 @@ async def update_user(request):
     update_data = request.json
     try:
         # Kullanıcıyı ID'sine göre bul
-        user = await User.find_one({"_id": user_id})
+        user = await User.get(user_id)
         if not user:
             return {"status": "error", "message": "User not found"}
 
         # "update_data"dan None değerleri filtrele (isteğe bağlı)
-        update_data = {key: value for key, value in update_data.items() if value is not None}
+        update_data = {key: value for key, value in update_data.items()}
 
         # Güncelleme işlemi (MongoDB $set kullanılarak)
         await user.update({"$set": update_data})
 
         # Güncellenmiş kullanıcıyı döndür
-        updated_user = await User.find_one({"_id": user_id})
+        updated_user = await User.get(user_id)
         return text("User informations updated successfully")
 
     except Exception as e:
@@ -68,7 +68,7 @@ async def delete_user(request):
 
     try:
 
-        response=await User.find_one({"_id": user_id})
+        response=await User.get(user_id)
         if response is None:
             return text("User not found")
 

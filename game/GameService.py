@@ -7,7 +7,7 @@ class GameService:
     @staticmethod
     async def get_all_games(request):
             results = await GameModel.find_all().to_list()
-            games = list(game.to_dict() for game in results)
+            games = [game.to_dict() for game in results]
             return json(games)
 
 
