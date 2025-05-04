@@ -57,6 +57,11 @@ async def play1hour_owned(request):
     return await OwnedService.play1hour_owned(request)
     # Example: PUT /play1hour?id=68169d748e21406fe36eb7cf
 
+@bp.route("/rate", methods=["PUT"])
+async def rate_owned(request):
+    return await OwnedService.rate_owned(request)
+    # Example: PUT /rate?id=68169d748e21406fe36eb7cf&rating=5
+
 @bp.route("/update", methods=["PUT"])
 async def update_owned(request):
     return await OwnedService.update_owned(request)

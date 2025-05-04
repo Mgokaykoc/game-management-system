@@ -4,8 +4,8 @@ class GameModel(Document):
     name: str
     genre: str
     photo: str
-    playTimeOfGame: int
-    totalRating: int = 0
+    playTimeOfGame: int = 0
+    weightedSumOfPlayTimes: int = 0
 
     class Settings:
         name = "game"
@@ -19,7 +19,7 @@ class GameModel(Document):
             "genre": self.genre,
             "photo": self.photo,
             "playTimeOfGame": self.playTimeOfGame,
-            "totalRating": self.totalRating,
+            "TotalRating": self.weightedSumOfPlayTimes/self.playTimeOfGame if self.playTimeOfGame > 0 else 0,
         }
 
 
@@ -30,9 +30,7 @@ class GameModel(Document):
         return cls(
             name=data["name"],
             genre=data["genre"],
-            photo=data["photo"],
-            playTimeOfGame=data["playTimeOfGame"],
-            totalRating=data.get("totalRating", 0)
+            photo=data["photo"]
         )
 
 """
@@ -40,7 +38,6 @@ Pycharm'ın autocompete özelliğiyle oluşturulmuş bir örnek JSON. Post ederk
 {
     "name": "game Name",
     "genre": "Action",
-    "photo": "http://example.com/photo.jpg",
-    "playTimeOfGame": 120,
+    "photo": "http://example.com/photo.jpg"
 }
 """

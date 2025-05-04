@@ -27,8 +27,7 @@ async def add_game(request):
     {
         "name": "game Name",
         "genre": "Action",
-        "photo": "http://example.com/photo.jpg",
-        "playTimeOfGame": 120,
+        "photo": "http://example.com/photo.jpg"
     }
     """
 
@@ -43,8 +42,7 @@ async def update_game(request):
         "id": "68169d748e21406fe36eb7cf",
         "name": "updated name",
         "genre": "updated genre", 
-        "photo": "http://example.com/updatedphoto.jpg",  
-        "playTimeOfGame": 123, 
+        "photo": "http://example.com/updatedphoto.jpg"
     }
     """
 

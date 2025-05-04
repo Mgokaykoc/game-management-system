@@ -12,6 +12,7 @@ class User(Document):
     password: str
     total_play_time: int = 0  # Tüm oyunlarda harcanan toplam süre
     most_played_game: str = None  # En çok oynanan oyun (isim)
+    hours_in_most_played_game: int = 0  # En çok oynanan oyundaki süre
 
     class Settings:
         name = "users"  # MongoDB’deki koleksiyon adı
